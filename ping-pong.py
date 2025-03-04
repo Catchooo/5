@@ -71,10 +71,11 @@ def check_win():
 start_button = pygame.Rect(width // 2 - 50, height // 2 - 25, 100, 50)
 new_game_button = pygame.Rect(width // 2 - 75, height // 2 + 30, 150, 50)
 
-bounce_sound = pygame.mixer.Sound("bounce.mp3")  
-win_sound = pygame.mixer.Sound("win.mp3")  
-pygame.mixer.music.load("8-bit.mp3")  
-pygame.mixer.music.play(-1)  
+bounce_sound = pygame.mixer.Sound("My folder/bounce.mp3")
+win_sound = pygame.mixer.Sound("My folder/win.mp3")
+pygame.mixer.music.load("My folder/8-bit.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 running = True
 while running:
@@ -124,10 +125,10 @@ while running:
 
         if paddle1.collidepoint(ball_x - ball_radius, ball_y) or paddle1.collidepoint(ball_x + ball_radius, ball_y):
             ball_speed_x *= -1
-            bounce_sound.play()  
+            bounce_sound.play()
         if paddle2.collidepoint(ball_x - ball_radius, ball_y) or paddle2.collidepoint(ball_x + ball_radius, ball_y):
             ball_speed_x *= -1
-            bounce_sound.play()  
+            bounce_sound.play()
 
         screen.fill(background_color)
         pygame.draw.rect(screen, paddle_color, paddle1)
@@ -139,7 +140,8 @@ while running:
         winner = check_win()
         if winner:
             game_state = "game_over"
-            win_sound.play() 
+            win_sound.play()
+            pygame.mixer.music.stop()
 
         pygame.display.flip()
 
